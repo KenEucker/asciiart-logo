@@ -16,6 +16,7 @@ module.exports = options => {
     borderColor,
     logoColor,
     textColor,
+    upperCase,
   } = options;
 
   const colorizer = (style) => {
@@ -46,7 +47,8 @@ module.exports = options => {
     }, []);
   }
 
-  const logoTextArray = textToLines(toTitleCase(name), lineChars || 15);
+  const logoText = (upperCase !== undefined ? upperCase : false) ? toTitleCase(name) : name;
+  const logoTextArray = textToLines(logoText, lineChars || 15);
 
   const logoLines = logoTextArray.reduce((result, line) => {
     return result.concat( figlet.textSync(line, { font: font }).split('\n') );
